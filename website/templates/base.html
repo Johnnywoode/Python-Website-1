@@ -44,6 +44,23 @@
 			  </div>
 			</div>
 		  </nav>
+		  {% with messages = get_flashed_messages(with_categories=true) %}
+		  	{% if messages %}
+			  {% for category, message in messages %}
+		  		{% if category == 'error' %}
+				  <div class="alert small alert-danger alert-dismissible fade show" role="alert">
+					<strong>Error <i class="fas fa-frown"></i>: </strong>{{message}}
+					<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+				  </div>
+				{% else %}
+				  <div class="alert small alert-success alert-dismissible fade show" role="alert">
+					<strong>Success <i class="fas fa-smile"></i>: </strong>{{message}}
+					<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+				  </div>
+				{% endif %}		
+			  {% endfor %}
+		  	{% endif %}
+		  {% endwith %}
 		  <section class="m-3">
 			{% block body %}Home{% endblock %}
 		  </section>
